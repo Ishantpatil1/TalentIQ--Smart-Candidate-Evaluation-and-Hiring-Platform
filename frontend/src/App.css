@@ -1,56 +1,68 @@
-body{
-  height: 100%;
+/* Remove old layout restrictions */
+body {
   margin: 0;
+  padding: 0;
+  width: 100% !important;
+  /* height: auto; */
 }
 
+/* Remove Vite's boxed layout */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
   min-height: 100vh;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Remove footer breaking behavior */
+footer {
+  position: static !important;
+  width: 100% !important;
+  margin-top: 0 !important;
 }
 
-Footer{
-  width: 100%;   /* Ensure footer stretches across the full width */
-    position: absolute; /* Position the footer at the bottom of the page */
-    left: 0;
-    right: 0;
-    margin-top: auto; /* Push footer to the bottom */
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
+/* Optional: keep card styling for other components */
 .card {
   padding: 2em;
 }
 
+/* Remove unnecessary Vite animations */
+.logo,
 .read-the-docs {
-  color: #888;
+  all: unset;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* :root {
+  --bg: #f5f7fb;
+  --text: #1a1a1a;
+  --card: white;
+  --sidebar: white;
+  --primary: #2c3e90;
+} */
+
+:root {
+  --bg: #030303;
+  --text: #ffffff;
+  --card: #0d0d0d;
+  --sidebar: #0d0d0d;
+  --primary: #6366f1;
+}
+
+.dark-mode {
+  --bg: #0d1117;
+  --text: #e6edf3;
+  --card: #161b22;
+  --sidebar: #1c2228;
+  --primary: #58a6ff;
+}
+
+/* smooth transitions */
+body, .dashboard-wrapper {
+  transition: background 0.3s ease, color 0.3s ease;
 }

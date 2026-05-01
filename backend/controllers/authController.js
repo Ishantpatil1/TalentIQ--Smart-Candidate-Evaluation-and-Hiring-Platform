@@ -10,13 +10,21 @@ const generateToken = (id) => {
 
 module.exports.registerUser = async (req, res) => {
     try {
-        const { name, email, password, role } = req.body;
+        const name = req.body.name?.trim();
+        const email = req.body.email?.trim().toLowerCase();
+        const password = req.body.password;
+        const requestedRole = req.body.role;
+        const role = requestedRole === 'recruiter' ? 'recruiter' : 'candidate';
+
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: 'Name, email, and password are required' });
+        }
+
         const userExits = await User.findOne({ email });
         if (userExits) {
             return res.status(400).json({ message: "User already exists" });
         }
 
-        // Role defaults to "candidate" if not provided
         const user = await User.create({ name, email, password, role });
         res.status(201).json({
             _id: user._id,
@@ -33,7 +41,13 @@ module.exports.registerUser = async (req, res) => {
 
 module.exports.loginUser = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const email = req.body.email?.trim().toLowerCase();
+        const password = req.body.password;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: 'Email and password are required' });
+        }
+
         const user = await User.findOne({ email });
         if(user && (await user.matchPassword(password))) {
             res.json({

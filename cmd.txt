@@ -1,0 +1,3 @@
+Python command = uvicorn app:app --host 0.0.0.0 --port 5000
+Node command = nodemon app.js
+Frontend command = npm run dev
